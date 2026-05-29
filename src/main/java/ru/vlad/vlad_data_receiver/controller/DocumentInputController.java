@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.transform.sax.SAXSource;
-import java.io.IOException;
 import java.io.StringReader;
 
 @RestController
@@ -64,19 +63,24 @@ public class DocumentInputController {
                     "<Error><Status>PARSE_ERROR</Status><Message>Invalid XML format: " +
                             e.getMessage() + "</Message></Error>"
             );
-        } catch (Exception e) {
-            logger.error("Error processing request: {}", e.getMessage(), e);
-            return ResponseEntity.internalServerError().body(
-                    "<Error><Status>INTERNAL_ERROR</Status><Message>Internal server error: " +
+        } catch (SAXException e) {
+            logger.error("XML processing error: {}", e.getMessage(), e);
+            return ResponseEntity.badRequest().body(
+                    "<Error><Status>XML_PROCESSING_ERROR</Status><Message>" +
                             e.getMessage() + "</Message></Error>"
+            );
+        } catch (RuntimeException e) {
+            logger.error("Unexpected runtime error: {}", e.getMessage(), e);
+            return ResponseEntity.internalServerError().body(
+                    "<Error><Status>INTERNAL_ERROR</Status><Message>Internal server error</Message></Error>"
             );
         }
     }
 
-    private DocumentInputRequest parseXml(String xml) throws JAXBException, SAXException, IOException {
+    private DocumentInputRequest parseXml(String xml) throws JAXBException, SAXException {
         InputSource source = new InputSource(new StringReader(xml));
         XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-        NamespaceFilter filter = new NamespaceFilter("http://ru.vlad/documents", true);  // ← Убираем namespace
+        NamespaceFilter filter = new NamespaceFilter("http://ru.vlad/documents", true);
         filter.setParent(xmlReader);
         SAXSource saxSource = new SAXSource(filter, source);
 

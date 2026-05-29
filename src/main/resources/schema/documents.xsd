@@ -2,20 +2,19 @@
 
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://ru.vlad/documents"
-        xmlns:tns="http://ru.vlad/documents"
-        elementFormDefault="qualified">
+        xmlns:tns="http://ru.vlad/documents" elementFormDefault="qualified">
 
     <element name="Document_Input_Request">
         <complexType>
             <sequence>
                 <element name="Document" maxOccurs="unbounded" type="tns:document"/>
             </sequence>
-            <attribute name="ID" type="string" use="required" />
-            <attribute name="TimeStamp" type="dateTime" use="required" />
-            <attribute name="blockNum" type="int" use="required" />
-            <attribute name="totalDocs" type="int" use="required" />
-            <attribute name="dataSet" type="string" use="required" />
-            <attribute name="OdDocType" type="string" use="required" />
+            <attribute name="ID" type="string" use="required"/>
+            <attribute name="TimeStamp" type="dateTime" use="required"/>
+            <attribute name="blockNum" type="int" use="required"/>
+            <attribute name="totalDocs" type="int" use="required"/>
+            <attribute name="dataSet" type="string" use="required"/>
+            <attribute name="OdDocType" type="string" use="required"/>
         </complexType>
     </element>
 
@@ -26,7 +25,7 @@
                 <element name="SourceSystemHistory" type="tns:sourceSystemHistory" minOccurs="0"/>
                 <element name="ParentDocs" type="tns:parentDocs" minOccurs="0"/>
             </sequence>
-            <attribute name="TimeStamp" type="dateTime" use="required" />
+            <attribute name="TimeStamp" type="dateTime" use="required"/>
         </complexType>
     </element>
 
@@ -45,8 +44,8 @@
     </complexType>
 
     <complexType name="documentAttribute">
-        <attribute name="IfPrimaryKey" type="boolean" use="required" />
-        <attribute name="AttributeCode" type="string" use="required" />
+        <attribute name="IfPrimaryKey" type="boolean" use="required"/>
+        <attribute name="AttributeCode" type="string" use="required"/>
         <attribute name="AttributeValue" type="anySimpleType"/>
     </complexType>
 
@@ -72,7 +71,7 @@
             <element name="SourceSystemHistory" type="tns:sourceSystemHistory" minOccurs="0"/>
             <element name="ParentDocs" type="tns:parentDocs" minOccurs="0"/>
         </sequence>
-        <attribute name="TimeStamp" type="dateTime" use="required" />
+        <attribute name="TimeStamp" type="dateTime" use="required"/>
     </complexType>
 
     <complexType name="entries">
@@ -138,8 +137,8 @@
             <element name="SignCard" type="tns:documentCard"/>
             <element name="SignData" type="tns:signBody"/>
         </sequence>
-        <attribute name="CriptoType" type="string" use="required" />
-        <attribute name="Included" type="boolean" use="required" />
+        <attribute name="CriptoType" type="string" use="required"/>
+        <attribute name="Included" type="boolean" use="required"/>
     </complexType>
 
     <complexType name="signBody">
